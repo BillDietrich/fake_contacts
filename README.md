@@ -26,13 +26,13 @@ If you wish, click the "Delete All Fake Contacts" button to delete them.
 
 ### Customizing
 
-The list of last names is just a comma-separated list.  You can edit it to have any names.  Best not to have any spaces.
+* The list of last names is just a comma-separated list.  You can edit it to have any names.  Best not to have any spaces.
 
-The list of first names is similar.
+* The list of first names is similar.
 
-The phone-number template is a single value used for all contacts.  Any character "n" in it will be replaced by a random digit 0-9.  The default format is "+21345678nnn", which is intended to use an unassigned country code "21".  You could delete the contents of this field if you wish.
+* The phone-number template is a single value used for all contacts.  Any character "n" in it will be replaced by a random digit 0-9.  The default format is ```+21345678nnn```, which is intended to use an unassigned country code "21".  You could delete the contents of this field if you wish.
 
-The email-address template is a single value used for all contacts.  Any string "FIRST" in it will be replaced by the contact's first name.  Any string "LAST" in it will be replaced by the contact's last name.  The default format is "FIRST.LAST@example.com", which is intended to be an unused email domain.  You could delete the contents of this field if you wish.
+* The email-address template is a single value used for all contacts.  Any string "FIRST" in it will be replaced by the contact's first name.  Any string "LAST" in it will be replaced by the contact's last name.  The default format is ```FIRST.LAST@example.com```, which is intended to be an unused email domain.  You could delete the contents of this field if you wish.
 
 
 ### Quirks
