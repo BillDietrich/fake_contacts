@@ -4,10 +4,9 @@ Create fake phone contacts.
 
 The idea is to create a lot of fake contacts in your phone, feeding bad data to any apps or companies who are copying your private data to use or sell it.  This is called "data-poisoning".
 
-[IN PROTOTYPING STAGE; NOT DANGEROUS, BUT NOT READY FOR USE !!!]
+[BEING DEVELOPED; NOT DANGEROUS, BUT NOT READY FOR USE !!!]
 
-![Do not use](https://www.billdietrich.me/AbnormalBrain.jpg "Do not use")
-
+<center><img src="https://www.billdietrich.me/AbnormalBrain.jpg" width="250" height="131" /></center>
 
 ## Functionality
 The user can set lists of last names and first names for fake contacts, and phone-number and email-address templates for them.  Then click buttons to create or delete all those contacts.
@@ -21,7 +20,7 @@ So, just install and launch the application, and click the "Create All Contacts"
 
 If you wish, click the "Delete All Fake Contacts" button to delete them.
 
-![Using the app](UsingTheApp.jpg "Using the app")
+<center><img src="UsingTheApp.jpg" width="180" height="390" /></center>
 
 
 ### Customizing
