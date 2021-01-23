@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'dart:math' hide log;
 
 //import 'dart:io';
 import 'package:contacts_service/contacts_service.dart';
@@ -46,6 +47,21 @@ class _MyHomePageState extends State<MyHomePage> {
   String sPhoneNumberTemplate = "+21345678nnn";
   String sEmailAddressTemplate = "FIRST.LAST@example.com";
 
+
+  String generatePhoneNumber() {
+    String sNumber = "";
+
+    for (var i=0 ; i<sPhoneNumberTemplate.length ; i++) {
+      if (sPhoneNumberTemplate[i] == 'n') {
+        var random = new Random();
+        sNumber += String.fromCharCode("0".codeUnitAt(0) + random.nextInt(10));
+      } else
+          sNumber += sPhoneNumberTemplate[i];
+    }
+
+    return sNumber;
+  }
+
   Future<void> _createAllContacts() async {
     log("_createAllContacts: about to call Permission.contacts.request");
     PermissionStatus permission = await Permission.contacts.request();
@@ -53,20 +69,49 @@ class _MyHomePageState extends State<MyHomePage> {
       log("_createAllContacts: no permission");
     } else {
       // Either the permission was already granted before or the user just granted it.
-      Contact newContact = Contact(
-          displayName: (firstNames[0] + " " + lastNames[0]), givenName: firstNames[0], familyName: lastNames[0]);
-      newContact.phones = [Item(label: "mobile", value:"1234")];
-      newContact.emails = [Item(label: "email", value:"abc@yahoo.com")];
-      log("_createAllContacts: about to call ContactsService.addContact");
-      // if Contact exists already, no error, another of same name is added
-      await ContactsService.addContact(newContact);
+      for (var i=0 ; i<lastNames.length ; i++) {
+        for (var j = 0; j < firstNames.length; j++) {
+          Contact newContact = Contact(
+              displayName: (firstNames[j] + " " + lastNames[i]),
+              givenName: firstNames[j],
+              familyName: lastNames[i]);
+          newContact.phones =
+          [Item(label: "mobile", value: generatePhoneNumber())];
+          newContact.emails = [Item(label: "email", value: "abc@yahoo.com")];
+          log("_createAllContacts: about to call ContactsService.addContact(" + newContact.displayName + ")");
+          // if Contact exists already, no error, another of same name is added
+          await ContactsService.addContact(newContact);
+        }
+      }
     };
     log("_createAllContacts: about to return");
   }
 
-
   Future<void> _deleteAllContacts() async {
-    log("_deleteAllContacts: called");
+    log("_deleteAllContacts: about to call Permission.contacts.request");
+    PermissionStatus permission = await Permission.contacts.request();
+    if (!permission.isGranted) {
+      log("_deleteAllContacts: no permission");
+    } else {
+      // Either the permission was already granted before or the user just granted it.
+      for (var i=0 ; i<lastNames.length ; i++) {
+        for (var j = 0; j < firstNames.length; j++) {
+          Contact newContact = Contact(
+              displayName: (firstNames[j] + " " + lastNames[i]),
+              givenName: firstNames[j],
+              familyName: lastNames[i]);
+          log("_deleteAllContacts: about to call ContactsService.getContacts(" + newContact.displayName + ")");
+          Iterable<Contact> iContacts = await ContactsService.getContacts(query: newContact.displayName);
+          for (var c in iContacts) {
+            log(
+                "_deleteAllContacts: about to call ContactsService.deleteContact(" +
+                    newContact.displayName + ")");
+            await ContactsService.deleteContact(c);
+          }
+        }
+      }
+    };
+    log("_deleteAllContacts: about to return");
   }
 
 
