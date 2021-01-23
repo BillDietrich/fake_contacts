@@ -48,41 +48,60 @@ class _MyHomePageState extends State<MyHomePage> {
   String sEmailAddressTemplate = "FIRST.LAST@example.com";
 
 
-  String generatePhoneNumber() {
+  String generatePhoneNumber(String sLastName) {
+    log("generatePhoneNumber: called, sPhoneNumberTemplate " + sPhoneNumberTemplate + ", sLastName " + sLastName);
     String sNumber = "";
+    int nNext = 0; // next char to use in sLastName
 
-    for (var i=0 ; i<sPhoneNumberTemplate.length ; i++) {
-      if (sPhoneNumberTemplate[i] == 'n') {
-        var random = new Random();
-        sNumber += String.fromCharCode("0".codeUnitAt(0) + random.nextInt(10));
-      } else
-          sNumber += sPhoneNumberTemplate[i];
+    for (var i = 0; i < sPhoneNumberTemplate.length; i++) {
+      //log("generatePhoneNumber: i " + i.toString() + ", sPhoneNumberTemplate[i] " + sPhoneNumberTemplate[i] + ", nNext " + nNext.toString());
+      if (sPhoneNumberTemplate[i] != 'n') {
+        sNumber += sPhoneNumberTemplate[i];
+      } else {
+        if (nNext >= sLastName.length)
+          sNumber += "0";
+        else {
+          sNumber +=
+          (String.fromCharCode(
+              "0".codeUnitAt(0) + (sLastName.codeUnitAt(nNext) % 10)));
+          nNext++;
+        }
+      }
     }
 
+    log("generatePhoneNumber: returning, sNumber " + sNumber);
     return sNumber;
   }
 
+
+  String generateEmailAddress(String sLastName, String sFirstName) {
+    return sEmailAddressTemplate.replaceAll("FIRST", sFirstName).replaceAll("LAST", sLastName);
+  }
+
   Future<void> _createAllContacts() async {
+
     log("_createAllContacts: about to call Permission.contacts.request");
     PermissionStatus permission = await Permission.contacts.request();
+
     if (!permission.isGranted) {
       log("_createAllContacts: no permission");
     } else {
       // Either the permission was already granted before or the user just granted it.
+
       for (var i=0 ; i<lastNames.length ; i++) {
         for (var j = 0; j < firstNames.length; j++) {
           Contact newContact = Contact(
               displayName: (firstNames[j] + " " + lastNames[i]),
               givenName: firstNames[j],
               familyName: lastNames[i]);
-          newContact.phones =
-          [Item(label: "mobile", value: generatePhoneNumber())];
-          newContact.emails = [Item(label: "email", value: "abc@yahoo.com")];
+          newContact.phones = [Item(label: "mobile", value: generatePhoneNumber(lastNames[i]))];
+          newContact.emails = [Item(label: "email", value: generateEmailAddress(lastNames[i], firstNames[j]))];
           log("_createAllContacts: about to call ContactsService.addContact(" + newContact.displayName + ")");
           // if Contact exists already, no error, another of same name is added
           await ContactsService.addContact(newContact);
         }
       }
+
     };
     log("_createAllContacts: about to return");
   }
