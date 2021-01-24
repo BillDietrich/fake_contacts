@@ -1,0 +1,69 @@
+# F-Droid metadata template
+#
+# See http://f-droid.org/manual for more details
+# and the Metadata reference
+# https://f-droid.org/docs/Build_Metadata_Reference/
+#
+# Fields that are commented out are optional
+#
+# Single-line fields start right after the colon (with a whitespace).
+
+Categories: (use those which apply)
+  - Phone & SMS
+  - Security
+License: MIT
+
+# WebSite: (web link)
+SourceCode: https://github.com/BillDietrich/fake_contacts
+# IssueTracker: (web link)
+
+# Changelog: (web link)
+# Donate: (web link)
+# FlattrID: (number)
+# LiberapayID: (number)
+# Bitcoin: (bitcoin address)
+
+AuthorName: Bill Dietrich
+AuthorEmail: bill@billdietrich.me
+AuthorWebSite: https://www.billdietrich.me/
+
+# You may not need to add Summary and Description here,
+# if you want to translate them. For details on other locations, see
+# https://f-droid.org/en/docs/All_About_Descriptions_Graphics_and_Screenshots/
+Summary: Create fake phone contacts, for data-poisoning
+Description: -|
+    Create fake phone contacts, that will be stored on your phone
+    along with your real contacts.  The idea is to feed fake data
+    to any apps or companies who are copying our private data to
+    use or sell it.  This is called "data-poisoning".
+    
+    Nothing about these fake contacts will interfere with your normal
+    use of your phone or your real contacts.
+
+RepoType: git
+Repo: https://github.com/BillDietrich/fake_contacts
+
+# At least one for new apps
+Builds:
+  - versionName: '1.0.0'
+    versionCode: 1
+    commit: v1.0
+    subdir: app
+    # submodules: true
+    gradle:
+      - yes
+    # output: some.apk
+    # prebuild: sed -i -e
+
+# For a complete list of possible flags, see the manual
+
+# MaintainerNotes: |-
+#     Here go the notes to take into account for future updates, builds, etc.
+#     Will be published in the wiki if present.
+
+# The following options are described at this location:
+# https://f-droid.org/docs/Build_Metadata_Reference/#UpdateCheckMode
+AutoUpdateMode: None
+UpdateCheckMode: RepoManifest
+CurrentVersion: '1.0.0'
+CurrentVersionCode: '1.0.0'
