@@ -57,6 +57,7 @@ If you wish, click the "Delete Fake Contacts" button to delete them.  You also c
 * Settings are not stored persistently.
 * Test on iOS.
 * Profiler complains that app is doing too much work on main thread sometimes.  Could be an issue if someone puts in many names ?
+* Massive inefficiency in the "react to every char changed in field" events.
 
 ### Development Environment
 I'm no expert on this stuff, this is my first phone app, maybe I'm doing some things stupidly.

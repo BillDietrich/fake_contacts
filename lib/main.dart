@@ -1,8 +1,9 @@
-import 'dart:convert';
+//import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'dart:math' hide log;
+//import 'dart:math' hide log;
+import 'package:shared_preferences/shared_preferences.dart';
 
 //import 'dart:io';
 import 'package:contacts_service/contacts_service.dart';
@@ -40,15 +41,75 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  String sListOfLastNames = "Zen,Zaragoza,Zabinski,Zimmermann";
-  String sListOfFirstNames = "Zoe,Zach,Zbigniew,Zaire";
+  String sListOfLastNames = "";
+  String sListOfFirstNames = "";
   var lastNames = [];
   var firstNames = [];
-  String sPhoneNumberTemplate = "+21345678nnn";
-  String sEmailAddressTemplate = "FIRST.LAST@example.com";
+  String sPhoneNumberTemplate = "";
+  String sEmailAddressTemplate = "";
 
+  Key keyLastNames = Key("LastNames");
+  Key keyFirstNames = Key("FirstNames");
+  Key keyPhoneNumberTemplate = Key("PhoneNumberTemplate");
+  Key keyEmailAddressTemplate = Key("EmailAddressTemplate");
 
-  String generatePhoneNumber(String sLastName) {
+  GetSettings() {
+    log("GetSettings: called");
+
+    SharedPreferences prefs = null;
+
+    if (false) {
+      try {
+        //prefs = await SharedPreferences.getInstance();
+        ;
+      } catch (e) {
+        log("GetSettings: exception1 " + e);
+        return null;
+      }
+
+      try {
+        sListOfLastNames = prefs.getString('sListOfLastNames');
+      } catch (e) {
+        log("GetSettings: exception2 " + e);
+        return null;
+      }
+      //log("GetSettings: saved last names " + sListOfLastNames);
+    }
+
+    if (false) {
+      sListOfLastNames = (prefs.getString('sListOfLastNames') ??
+          "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane");
+      sListOfFirstNames =
+      (prefs.getString('sListOfFirstNames') ?? "Zoe,Zach,Zbigniew,Zaire,Zero");
+      sPhoneNumberTemplate =
+      (prefs.getString('sPhoneNumberTemplate') ?? "+21345678nnn");
+      sEmailAddressTemplate =
+      (prefs.getString('sEmailAddressTemplate') ?? "FIRST.LAST@example.com");
+    } else {
+      sListOfLastNames = "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane";
+      sListOfFirstNames = "Zoe,Zach,Zbigniew,Zaire,Zero";
+      sPhoneNumberTemplate = "+21345678nnn";
+      sEmailAddressTemplate = "FIRST.LAST@example.com";
+    }
+
+    // to create the arrays of names
+    _changedLastNames(sListOfLastNames);
+    _changedFirstNames(sListOfFirstNames);
+
+    return prefs;
+  }
+
+  void SaveSettings() async {
+    log("SaveSettings: called");
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();;
+    await prefs.setString("sListOfLastNames", sListOfLastNames);
+    await prefs.setString("sListOfFirstNames", sListOfFirstNames);
+    await prefs.setString("sPhoneNumberTemplate", sPhoneNumberTemplate);
+    await prefs.setString("sEmailAddressTemplate", sEmailAddressTemplate);
+  }
+
+    String generatePhoneNumber(String sLastName) {
     log("generatePhoneNumber: called, sPhoneNumberTemplate " + sPhoneNumberTemplate + ", sLastName " + sLastName);
     String sNumber = "";
     int nNext = 0; // next char to use in sLastName
@@ -142,6 +203,8 @@ class _MyHomePageState extends State<MyHomePage> {
     lastNames = sListOfLastNames.split(",");
     log("_changedLastNames: lastNames[0] == " + lastNames[0]);
     log("_changedLastNames: lastNames.toString == " + lastNames.toString());
+
+    SaveSettings();
   }
 
   // this gets called every time a char gets changed in the field
@@ -152,26 +215,31 @@ class _MyHomePageState extends State<MyHomePage> {
     firstNames = sListOfFirstNames.split(",");
     log("_changedFirstNames: firstNames[0] == " + firstNames[0]);
     log("_changedFirstNames: firstNames.toString == " + firstNames.toString());
+
+    SaveSettings();
   }
 
   // this gets called every time a char gets changed in the field
   void _changedPhoneNumberTemplate(String sNewValue){
     log("_changedPhoneNumberTemplate: called, " + sNewValue);
     sPhoneNumberTemplate = sNewValue;
+
+    SaveSettings();
   }
 
   // this gets called every time a char gets changed in the field
   void _changedEmailAddressTemplate(String sNewValue){
     log("_changedEmailAddressTemplate: called, " + sNewValue);
     sEmailAddressTemplate = sNewValue;
+
+    SaveSettings();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    // to create the arrays of names
-    _changedLastNames(sListOfLastNames);
-    _changedFirstNames(sListOfFirstNames);
+    GetSettings();
+    // but needs to be async to do storage !!!
 
     return Scaffold(
       appBar: AppBar(
@@ -186,6 +254,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextFormField(
+              key: keyLastNames,
               onChanged: _changedLastNames,
               maxLines: 1,
               initialValue: sListOfLastNames,
@@ -204,6 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height:20,
             ),
             TextFormField(
+              key: keyFirstNames,
               onChanged: _changedFirstNames,
               maxLines: 1,
               initialValue: sListOfFirstNames,
@@ -222,6 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height:30,
             ),
             TextFormField(
+              key: keyPhoneNumberTemplate,
               onChanged: _changedPhoneNumberTemplate,
               maxLines: 1,
               initialValue: sPhoneNumberTemplate,
@@ -240,6 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height:20,
             ),
             TextFormField(
+              key: keyEmailAddressTemplate,
               onChanged: _changedEmailAddressTemplate,
               maxLines: 1,
               initialValue: sEmailAddressTemplate,
