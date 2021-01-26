@@ -30,6 +30,6 @@ Builds:
       - yes
 
 AutoUpdateMode: None
-UpdateCheckMode: RepoManifest
-CurrentVersion: '1.0.0'
-CurrentVersionCode: '1.0.0'
+UpdateCheckMode: Tags
+CurrentVersion: '2'
+CurrentVersionCode: '2'
