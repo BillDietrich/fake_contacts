@@ -26,8 +26,6 @@ Builds:
       - $$flutter$$/bin/flutter config --no-analytics
       - $$flutter$$/bin/flutter packages pub get
       - $$flutter$$/bin/flutter build apk --flavor fdroid
-    gradle:
-      - yes
 
 AutoUpdateMode: None
 UpdateCheckMode: Tags
