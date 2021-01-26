@@ -1,4 +1,4 @@
-Categories: (use those which apply)
+Categories:
   - Phone & SMS
   - Security
 License: MIT
@@ -17,11 +17,8 @@ Builds:
     versionCode: 1
     commit: v1.0
     subdir: app
-    # submodules: true
     gradle:
       - yes
-    # output: some.apk
-    # prebuild: sed -i -e
 
 AutoUpdateMode: None
 UpdateCheckMode: RepoManifest
