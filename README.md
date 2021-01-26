@@ -52,6 +52,7 @@ You could uninstall this app after creating the fake contacts, without causing a
 
 ## Development
 ### To-Do list
+* Get published in F-Droid.
 * No UI feedback after create and delete operations.
 * Inefficiency in the "save settings after every char changed in field" events.
 * Test on iOS.
