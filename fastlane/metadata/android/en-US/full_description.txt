@@ -1,0 +1,3 @@
+Create fake phone contacts, that will be stored on your phone along with your real contacts.  The idea is to feed fake data to any apps or companies who are copying our private data to use or sell it.  This is called "data-poisoning".
+    
+Nothing about these fake contacts will interfere with your normal use of your phone or your real contacts.
