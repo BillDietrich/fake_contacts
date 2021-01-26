@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.billdietrich.fake_contacts">
    <application
-        android:label="fake_contacts"
+        android:label="Fake Contacts"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

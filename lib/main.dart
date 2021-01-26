@@ -54,15 +54,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Key keyPhoneNumberTemplate = Key("PhoneNumberTemplate");
   Key keyEmailAddressTemplate = Key("EmailAddressTemplate");
 
-  TextEditingController LastNamesController = TextEditingController();
-  TextEditingController FirstNamesController = TextEditingController();
-  TextEditingController PhoneNumberTemplateController = TextEditingController();
-  TextEditingController EmailAddressTemplateController = TextEditingController();
+  TextEditingController lastNamesController = TextEditingController();
+  TextEditingController firstNamesController = TextEditingController();
+  TextEditingController phoneNumberTemplateController = TextEditingController();
+  TextEditingController emailAddressTemplateController = TextEditingController();
 
 
-  Future<String> GetLastNames() async {
-    log("GetLastNames: called");
-    SharedPreferences prefs = null;
+  Future<String> getLastNames() async {
+    log("getLastNames: called");
+    SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
     final String sValue = (prefs.getString('sListOfLastNames') ??
@@ -73,9 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return sValue;
   }
 
-  Future<String> GetFirstNames() async {
-    log("GetFirstNames: called");
-    SharedPreferences prefs = null;
+  Future<String> getFirstNames() async {
+    log("getFirstNames: called");
+    SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
     final String sValue = (prefs.getString('sListOfFirstNames') ?? "Zoe,Zach,Zbigniew,Zaire,Zero");
@@ -85,9 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return sValue;
   }
 
-  Future<String> GetPhoneNumberTemplate() async {
-    log("GetPhoneNumberTemplate: called");
-    SharedPreferences prefs = null;
+  Future<String> getPhoneNumberTemplate() async {
+    log("getPhoneNumberTemplate: called");
+    SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
     final String sValue = (prefs.getString('sPhoneNumberTemplate') ?? "+21345678nnn");
@@ -95,9 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return sValue;
   }
 
-  Future<String> GetEmailAddressTemplate() async {
-    log("GetEmailAddressTemplate: called");
-    SharedPreferences prefs = null;
+  Future<String> getEmailAddressTemplate() async {
+    log("getEmailAddressTemplate: called");
+    SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
     final String sValue = (prefs.getString('sEmailAddressTemplate') ?? "FIRST.LAST@example.com");
@@ -105,19 +105,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return sValue;
   }
 
-  Future<SharedPreferences> GetStoredSettings() async {
-    log("GetStoredSettings: called");
-    SharedPreferences prefs = null;
+  Future<void> getStoredSettings() async {
+    log("getStoredSettings: called");
+    SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
     sListOfLastNames = prefs.getString('sListOfLastNames');
-    //log("GetStoredSettings: retrieved last names " + (sListOfLastNames ?? "null"));
+    //log("getStoredSettings: retrieved last names " + (sListOfLastNames ?? "null"));
     if (sListOfLastNames == null) {
       sListOfLastNames = "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane";
       sListOfFirstNames = "Zoe,Zach,Zbigniew,Zaire,Zero";
       sPhoneNumberTemplate = "+21345678nnn";
       sEmailAddressTemplate = "FIRST.LAST@example.com";
-      SaveSettings();
+      saveLastNames();
+      saveFirstNames();
+      savePhoneNumberTemplate();
+      saveEmailAddressTemplate();
     } else {
       sListOfFirstNames = prefs.getString('sListOfFirstNames');
       sPhoneNumberTemplate = prefs.getString('sPhoneNumberTemplate');
@@ -128,14 +131,18 @@ class _MyHomePageState extends State<MyHomePage> {
     lastNames = sListOfLastNames.split(",");
     firstNames = sListOfFirstNames.split(",");
 
-    LastNamesController.text = sListOfLastNames;
-    FirstNamesController.text = sListOfFirstNames;
-    PhoneNumberTemplateController.text = sPhoneNumberTemplate;
-    EmailAddressTemplateController.text = sEmailAddressTemplate;
+    lastNamesController.text = sListOfLastNames;
+    // this gets called for every keypress in the field, but no info about what's happening
+    //lastNamesController.addListener(() {
+    //  log("lastNamesController.Listener: called");
+    //});
+    firstNamesController.text = sListOfFirstNames;
+    phoneNumberTemplateController.text = sPhoneNumberTemplate;
+    emailAddressTemplateController.text = sEmailAddressTemplate;
   }
 
-  void GetSettings() {
-    log("GetSettings: called");
+  void getSettings() {
+    log("getSettings: called");
 
       sListOfLastNames = "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane";
       sListOfFirstNames = "Zoe,Zach,Zbigniew,Zaire,Zero";
@@ -147,14 +154,32 @@ class _MyHomePageState extends State<MyHomePage> {
       _changedFirstNames(sListOfFirstNames);
   }
 
-  void SaveSettings() async {
-    log("SaveSettings: called");
+  void saveLastNames() async {
+    log("saveLastNames: called");
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();;
-    log("SaveSettings: sListOfLastNames " + sListOfLastNames);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    log("saveLastNames: sListOfLastNames " + sListOfLastNames);
     await prefs.setString("sListOfLastNames", sListOfLastNames);
+  }
+
+  void saveFirstNames() async {
+    log("saveFirstNames: called");
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("sListOfFirstNames", sListOfFirstNames);
+  }
+
+  void savePhoneNumberTemplate() async {
+    log("savePhoneNumberTemplate: called");
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("sPhoneNumberTemplate", sPhoneNumberTemplate);
+  }
+
+  void saveEmailAddressTemplate() async {
+    log("saveEmailAddressTemplate: called");
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("sEmailAddressTemplate", sEmailAddressTemplate);
   }
 
@@ -212,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
 
-    };
+    }
     log("_createAllContacts: about to return");
   }
 
@@ -239,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
           }
         }
       }
-    };
+    }
     log("_deleteAllContacts: about to return");
   }
 
@@ -253,11 +278,12 @@ class _MyHomePageState extends State<MyHomePage> {
     //log("_changedLastNames: lastNames[0] == " + lastNames[0]);
     //log("_changedLastNames: lastNames.toString == " + lastNames.toString());
 
-    SaveSettings();
+    saveLastNames();
   }
 
+
   // this gets called every time a char gets changed in the field
-  // wasteful to recalculate every time, but doesn't matter
+  // wasteful to recalculate and save every time
   void _changedFirstNames(String sNewValue){
     log("_changedFirstNames: called, " + sNewValue);
     sListOfFirstNames = sNewValue;
@@ -265,7 +291,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //log("_changedFirstNames: firstNames[0] == " + firstNames[0]);
     //log("_changedFirstNames: firstNames.toString == " + firstNames.toString());
 
-    SaveSettings();
+    saveFirstNames();
   }
 
   // this gets called every time a char gets changed in the field
@@ -273,7 +299,7 @@ class _MyHomePageState extends State<MyHomePage> {
     log("_changedPhoneNumberTemplate: called, " + sNewValue);
     sPhoneNumberTemplate = sNewValue;
 
-    SaveSettings();
+    savePhoneNumberTemplate();
   }
 
   // this gets called every time a char gets changed in the field
@@ -281,16 +307,16 @@ class _MyHomePageState extends State<MyHomePage> {
     log("_changedEmailAddressTemplate: called, " + sNewValue);
     sEmailAddressTemplate = sNewValue;
 
-    SaveSettings();
+    saveEmailAddressTemplate();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    //GetSettings();      // dummy that doesn't read storage
-    GetStoredSettings();  // need to wait for it, but can't !!!
-    //Future.wait(GetStoredSettings());   // illegal ?
-    //final int number = waitFor<int>(GetStoredSettings());
+    //getSettings();      // dummy that doesn't read storage
+    getStoredSettings();  // need to wait for it, but can't !!!
+    //Future.wait(getStoredSettings());   // illegal ?
+    //final int number = waitFor<int>(getStoredSettings());
 
     return Scaffold(
       appBar: AppBar(
@@ -307,9 +333,9 @@ class _MyHomePageState extends State<MyHomePage> {
             TextFormField(
               key: keyLastNames,    // want to set value using this key, but can't
               onChanged: _changedLastNames,
-              controller: LastNamesController,
+              controller: lastNamesController,
               maxLines: 1,
-              initialValue: sListOfLastNames, // want GetLastNames() here but can't
+              initialValue: sListOfLastNames, // want getLastNames() here but can't
               decoration: new InputDecoration(
                 labelText: 'Last names',
                 focusedBorder: OutlineInputBorder(
@@ -327,7 +353,7 @@ class _MyHomePageState extends State<MyHomePage> {
             TextFormField(
               key: keyFirstNames,
               onChanged: _changedFirstNames,
-              controller: FirstNamesController,
+              controller: firstNamesController,
               maxLines: 1,
               initialValue: sListOfFirstNames,
               decoration: new InputDecoration(
@@ -347,7 +373,7 @@ class _MyHomePageState extends State<MyHomePage> {
             TextFormField(
               key: keyPhoneNumberTemplate,
               onChanged: _changedPhoneNumberTemplate,
-              controller: PhoneNumberTemplateController,
+              controller: phoneNumberTemplateController,
               maxLines: 1,
               initialValue: sPhoneNumberTemplate,
               decoration: new InputDecoration(
@@ -369,7 +395,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: _changedEmailAddressTemplate,
               maxLines: 1,
               initialValue: sEmailAddressTemplate,
-              controller: EmailAddressTemplateController,
+              controller: emailAddressTemplateController,
               decoration: new InputDecoration(
                 labelText: 'Email address template',
                 focusedBorder: OutlineInputBorder(

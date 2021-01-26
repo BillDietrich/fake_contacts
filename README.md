@@ -1,12 +1,8 @@
-# fake_contacts
+# Fake Contacts
 
-Create fake phone contacts, that will be stored on your phone along with your real contacts.  The idea is to feed fake data to any apps or companies who are copying our private data to use or sell it.  This is called "data-poisoning".
+Android phone app that creates fake contacts, which will be stored on your smartphone along with your real contacts.  This feeds fake data to any apps or companies who are copying our private data to use or sell it.  This is called "data-poisoning".
 
 Nothing about these fake contacts will interfere with your normal use of your phone or your real contacts.
-
-[BEING DEVELOPED; WORKS ON ANDROID, NOT DANGEROUS, BUT NOT READY FOR USE !!!]
-
-<img src="https://www.billdietrich.me/AbnormalBrain.jpg" width="250" height="131" />
 
 ## Functionality
 The user can set lists of last names and first names for fake contacts, and phone-number and email-address templates for them.  Then click buttons to create or delete fake contacts with all combinations of the first and last names.
@@ -21,6 +17,8 @@ The default values should be sensible.  All of the first and last names start wi
 So, just install and launch the application, and click the "Create Fake Contacts" button.  The system should ask you to grant Contacts permission to the application.  Then the contacts (one for each firstname-lastname combination) will be created.  Launch your usual Contacts app and scroll to the end to see the new contacts.
 
 If you wish, click the "Delete Fake Contacts" button to delete them.  You also could use your normal Contacts app to delete them manually at any time, without causing any problem.
+
+You could uninstall this app after creating the fake contacts, without causing any problem.
 
 
 ### Customizing
@@ -38,7 +36,7 @@ If you wish, click the "Delete Fake Contacts" button to delete them.  You also c
 
 * The app is designed to be very simple and fail silently.  If you deny permission to access contacts, the app will not complain, it just will not work.  If you click the "Create" button multiple times, you just get one set of fake contacts.  If you click the "Create" button multiple times while changing templates between clicks, you will get duplicate-name fake contacts (harmless).  If you click the "Delete" button and the specified contacts don't exist, nothing is done, and no error message is shown.
 
-* Don't create any fake contacts with the same full name as one of your real contacts.  If you delete fake contacts, the real one with same name will be deleted too.
+* Don't create any fake contact with the same full name as one of your real contacts.  If you delete fake contacts, the real one with same name will be deleted too.
 
 * Replacements for "n" digits in phone numbers are calculated deterministicly (repeatably) from contact's last name.  So for example if 5 users of this app all just leave everything set at defaults, the same contacts will show up on each of their phones with the same names, phone numbers, and email addresses.  This is good, for data-poisoning purposes.  Further, all fake contacts with same last name will have same phone number (debatable whether this is good or bad).
 
@@ -54,9 +52,10 @@ If you wish, click the "Delete Fake Contacts" button to delete them.  You also c
 
 ## Development
 ### To-Do list
-* Massive inefficiency in the "save settings after every char changed in field" events.
+* No UI feedback after create and delete operations.
+* Inefficiency in the "save settings after every char changed in field" events.
 * Test on iOS.
-* Profiler complains that app is doing too much work on main thread sometimes.  Could be an issue if someone puts in many names ?
+* Sometimes profiler complains that app is doing too much work on main thread.  Could be an issue if someone puts in many names ?
 
 ### Development Environment
 I'm no expert on this stuff, this is my first phone app, maybe I'm doing some things stupidly.
