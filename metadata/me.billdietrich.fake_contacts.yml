@@ -25,7 +25,6 @@ Builds:
     build:
       - $$flutter$$/bin/flutter config --no-analytics
       - $$flutter$$/bin/flutter packages pub get
-      - $$flutter$$/bin/flutter packages pub run flutter_launcher_icons:main
       - $$flutter$$/bin/flutter build apk --flavor fdroid
 
 AutoUpdateMode: None
