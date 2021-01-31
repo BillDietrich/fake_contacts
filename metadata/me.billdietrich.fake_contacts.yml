@@ -10,7 +10,7 @@ RepoType: git
 Repo: https://github.com/BillDietrich/fake_contacts
 
 Builds:
-  - versionName: 1.0.0
+  - versionName: 1.2+2
     versionCode: 2
     commit: v1.2
     output: build/app/outputs/apk/release/app-release.apk
@@ -25,10 +25,10 @@ Builds:
     build:
       - $$flutter$$/bin/flutter config --no-analytics
       - $$flutter$$/bin/flutter packages pub get
-      - $$flutter$$/bin/flutter build apk --flavor fdroid
+      - $$flutter$$/bin/flutter build apk
 
 AutoUpdateMode: Version v%v
 UpdateCheckMode: HTTP
 UpdateCheckData: https://raw.githubusercontent.com/BillDietrich/fake_contacts/master/pubspec.yaml|version:\s.+\+(\d+)|.|version:\s(.+)\+
-CurrentVersion: 1.0.0
+CurrentVersion: 1.2+2
 CurrentVersionCode: 2
