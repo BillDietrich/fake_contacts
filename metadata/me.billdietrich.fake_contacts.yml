@@ -29,6 +29,6 @@ Builds:
       - $$flutter$$/bin/flutter build apk --flavor fdroid
 
 AutoUpdateMode: None
-UpdateCheckMode: None
+UpdateCheckMode: Tags
 CurrentVersion: 1.0.0
 CurrentVersionCode: 2
