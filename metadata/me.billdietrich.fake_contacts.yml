@@ -20,15 +20,15 @@ Builds:
       - ios
       - test
       - integration_test
-    prebuild: echo "flutter.sdk=$$flutter$$" >> ../local.properties
+    prebuild: echo 'android.applicationVariants.all { variant -> variant.outputs.all
+        { output -> outputFileName = "app-${output.baseName}.apk" } }' >> android/app/build.gradle
     build:
       - $$flutter$$/bin/flutter config --no-analytics
       - $$flutter$$/bin/flutter packages pub get
+      - $$flutter$$/bin/flutter packages pub run flutter_launcher_icons:main
       - $$flutter$$/bin/flutter build apk --flavor fdroid
-    gradle:
-      - no
 
 AutoUpdateMode: None
-UpdateCheckMode: Tags
+UpdateCheckMode: None
 CurrentVersion: 1.0.0
 CurrentVersionCode: 2
