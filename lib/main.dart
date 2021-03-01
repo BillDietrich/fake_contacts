@@ -65,8 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
-    final String sValue = (prefs.getString('sListOfLastNames') ??
-        "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane");
+    final String sValue = prefs.getString('sListOfLastNames');
     sListOfLastNames = sValue;
     // to create the array of names
     _changedLastNames(sListOfLastNames);
@@ -78,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
-    final String sValue = (prefs.getString('sListOfFirstNames') ?? "Zoe,Zach,Zbigniew,Zaire,Zero");
+    final String sValue = prefs.getString('sListOfFirstNames');
     sListOfFirstNames = sValue;
     // to create the array of names
     _changedFirstNames(sListOfFirstNames);
@@ -90,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
-    final String sValue = (prefs.getString('sPhoneNumberTemplate') ?? "+21345678nnn");
+    final String sValue = prefs.getString('sPhoneNumberTemplate');
     sPhoneNumberTemplate = sValue;
     return sValue;
   }
@@ -100,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SharedPreferences prefs;
 
     prefs = await SharedPreferences.getInstance();
-    final String sValue = (prefs.getString('sEmailAddressTemplate') ?? "FIRST.LAST@example.com");
+    final String sValue = prefs.getString('sEmailAddressTemplate');
     sEmailAddressTemplate = sValue;
     return sValue;
   }
@@ -113,9 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
     sListOfLastNames = prefs.getString('sListOfLastNames');
     //log("getStoredSettings: retrieved last names " + (sListOfLastNames ?? "null"));
     if (sListOfLastNames == null) {
-      sListOfLastNames = "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane";
-      sListOfFirstNames = "Zoe,Zach,Zbigniew,Zaire,Zero";
-      sPhoneNumberTemplate = "+21345678nnn";
+      sListOfLastNames = "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane,Zeiss,Zimmer,Zaal,Zaman,Zambrano,Zanetti,Zangari,Zappa,Zavala,Zawisza,Zeegers,Zelenka,Zellweger,Zeni,Zhang,Zhao,Zheng,Zhou,Ziegler,Zima";
+      sListOfFirstNames = "Zoe,Zach,Zbigniew,Zaire,Zero,Zakai,Zamir,Zan,Zanna,Zareen,Zeb,Zeki,Zelda,Zella,Zeno,Zephyr,Zhen,Zhi,Zhong,Zhu,Ziba,Ziggy,Zion,Zola,Zolyan,Zora,Zsazsa,Zuzana";
+      sPhoneNumberTemplate = "+2134567nnnn";
       sEmailAddressTemplate = "FIRST.LAST@example.com";
       saveLastNames();
       saveFirstNames();
@@ -139,19 +138,6 @@ class _MyHomePageState extends State<MyHomePage> {
     firstNamesController.text = sListOfFirstNames;
     phoneNumberTemplateController.text = sPhoneNumberTemplate;
     emailAddressTemplateController.text = sEmailAddressTemplate;
-  }
-
-  void getSettings() {
-    log("getSettings: called");
-
-      sListOfLastNames = "Zen,Zaragoza,Zabinski,Zimmermann,Zapata,Zona,Zidane";
-      sListOfFirstNames = "Zoe,Zach,Zbigniew,Zaire,Zero";
-      sPhoneNumberTemplate = "+21345678nnn";
-      sEmailAddressTemplate = "FIRST.LAST@example.com";
-
-      // to create the arrays of names
-      _changedLastNames(sListOfLastNames);
-      _changedFirstNames(sListOfFirstNames);
   }
 
   void saveLastNames() async {
@@ -224,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // Either the permission was already granted before or the user just granted it.
 
       for (var i=0 ; i<lastNames.length ; i++) {
-        for (var j = 0; j < firstNames.length; j++) {
+        for (var j=0; j<firstNames.length; j++) {
           Contact newContact = Contact(
               displayName: (firstNames[j] + " " + lastNames[i]),
               givenName: firstNames[j],
@@ -249,7 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       // Either the permission was already granted before or the user just granted it.
       for (var i=0 ; i<lastNames.length ; i++) {
-        for (var j = 0; j < firstNames.length; j++) {
+        for (var j=0; j<firstNames.length; j++) {
           Contact newContact = Contact(
               displayName: (firstNames[j] + " " + lastNames[i]),
               givenName: firstNames[j],
@@ -313,7 +299,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    //getSettings();      // dummy that doesn't read storage
     getStoredSettings();  // need to wait for it, but can't !!!
     //Future.wait(getStoredSettings());   // illegal ?
     //final int number = waitFor<int>(getStoredSettings());
@@ -414,9 +399,14 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => _createAllContacts(),
               child: Text("Create Fake Contacts"),
             ),
+            SizedBox(
+              width: 10,
+              height:30,
+            ),
             ElevatedButton(
               onPressed: () => _deleteAllContacts(),
               child: Text("Delete Fake Contacts"),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.pink) ),
             ),
           ],
         ),

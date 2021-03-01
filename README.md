@@ -10,13 +10,13 @@ The user can set lists of last names and first names for fake contacts, and phon
 
 ## Use
 
-<img src="UsingTheApp.jpg" width="190" height="400" />
+<img src="UsingTheApp.jpg" width="185" height="395" />
 
 The default values should be sensible.  All of the first and last names start with "Z", to try to keep them from colliding with names of real contacts, and to keep them out of the way (at the end of the Contacts list).
 
-So, just install and launch the application, and click the "Create Fake Contacts" button.  The system should ask you to grant Contacts permission to the application.  Then the contacts (one for each firstname-lastname combination) will be created.  Launch your usual Contacts app and scroll to the end to see the new contacts.
+So, just install and launch the application, and click the "Create Fake Contacts" button.  The system should ask you to grant Contacts permission to the application.  Then the contacts (one for each firstname-lastname combination) will be created.  Launch your usual Contacts app and scroll to the end to see the new contacts.  Note: it may take a couple of minutes to update the list.
 
-If you wish, click the "Delete Fake Contacts" button to delete them.  You also could use your normal Contacts app to delete them manually at any time, without causing any problem.
+If you wish, click the "Delete Fake Contacts" button to delete them.  Note: it may take a couple of minutes to update the list.  You also could use your normal Contacts app to delete them manually at any time, without causing any problem.
 
 You could uninstall this app after creating the fake contacts, without causing any problem.
 
@@ -27,7 +27,7 @@ You could uninstall this app after creating the fake contacts, without causing a
 
 * The list of first names is similar.
 
-* The phone-number template is a single value used for all contacts.  Any character "n" in it will be replaced by a digit 0-9, derived from the contact's last name.  The default format is ```+21345678nnn```, which is intended to use an unassigned country code "21".  You could delete the contents of this field if you wish, and no phone numbers will be generated.
+* The phone-number template is a single value used for all contacts.  Any character "n" in it will be replaced by a digit 0-9, derived from the contact's last name.  The default format is ```+2134567nnnn```, which is intended to use an unassigned country code "21".  You could delete the contents of this field if you wish, and no phone numbers will be generated.
 
 * The email-address template is a single value used for all contacts.  Any string "FIRST" in it will be replaced by the contact's first name.  Any string "LAST" in it will be replaced by the contact's last name.  The default format is ```FIRST.LAST@example.com```, which is intended to be an unused email domain.  You could delete the contents of this field if you wish, and no email addresses will be generated.
 
@@ -45,18 +45,23 @@ You could uninstall this app after creating the fake contacts, without causing a
 
 
 ## Releases
-### 1.0.0
+### 1.0.0 Got working.
+### 1.6.0 Got published on F-Droid.
+### 1.7.0 Changed color of delete button, added space between buttons, added a lot more names, cleaned up the code a little.
+
 
 
 ---
 
 ## Development
 ### To-Do list
-* Get published in F-Droid.
+* What Android versions are supported ?  I tested on 9; someone else says it works on 9 and crashes on 5.
+* Add buttons to add/delete fake secondary info (e.g. birthday ?) on ALL contacts. Or make a separate app for that.
+* Want to explicitly set Notification permission off, but there's no way to do it.
 * No UI feedback after create and delete operations.
+* Add photos from thispersondoesnotexist.com ?
 * Inefficiency in the "save settings after every char changed in field" events.
 * Test on iOS.
-* Sometimes profiler complains that app is doing too much work on main thread.  Could be an issue if someone puts in many names ?
 
 ### Development Environment
 I'm no expert on this stuff, this is my first phone app, maybe I'm doing some things stupidly.
@@ -66,8 +71,12 @@ Now using:
 * Flutter
 * Dart
 * Linux
+* Phone running Android 9
 
-https://github.com/BillDietrich/fake_contacts.git
+[GitHub repo for this app](https://github.com/BillDietrich/fake_contacts)
+
+[My web site](https://www.billdietrich.me/)
+
 
 ---
 
