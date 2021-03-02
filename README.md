@@ -4,6 +4,8 @@ Android phone app that creates fake contacts, which will be stored on your smart
 
 Nothing about these fake contacts will interfere with your normal use of your phone or your real contacts.
 
+The app is available through F-Droid.
+
 ## Functionality
 The user can set lists of last names and first names for fake contacts, and phone-number and email-address templates for them.  Then click buttons to create or delete fake contacts with all combinations of the first and last names.
 
@@ -45,9 +47,12 @@ You could uninstall this app after creating the fake contacts, without causing a
 
 
 ## Releases
-### 1.0.0 Got working.
-### 1.6.0 Got published on F-Droid.
-### 1.7.0 Changed color of delete button, added space between buttons, added a lot more names, cleaned up the code a little.
+### 1.0.0
+Got working.
+### 1.6.0
+Got published on F-Droid.
+### 1.7.0
+Changed color of delete button, added space between buttons, added a lot more names, cleaned up the code a little.
 
 
 
