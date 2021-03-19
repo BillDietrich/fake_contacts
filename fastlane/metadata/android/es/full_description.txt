@@ -1,0 +1,3 @@
+Crea contactos telefónicos falsos, que se almacenarán en tu teléfono junto con tus contactos reales.  La idea es alimentar con datos falsos a cualquier aplicación o empresa que copie nuestros datos privados para utilizarlos o venderlos.  Esto se llama "envenenamiento de datos".
+    
+Ninguno de estos contactos falsos interferirá con el uso normal de tu teléfono o tus contactos reales.
