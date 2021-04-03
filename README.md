@@ -6,6 +6,8 @@ Nothing about these fake contacts will interfere with your normal use of your ph
 
 The app is available through F-Droid.
 
+This is a sister-application to "Fake Contacts 2", which puts fake information in some fields of all contacts.
+
 ## Functionality
 The user can set lists of last names and first names for fake contacts, and phone-number and email-address templates for them.  Then click buttons to create or delete fake contacts with all combinations of the first and last names.
 
@@ -36,7 +38,7 @@ You could uninstall this app after creating the fake contacts, without causing a
 
 ### Quirks
 
-* The app is designed to be very simple and fail silently.  If you deny permission to access contacts, the app will not complain, it just will not work.  If you click the "Create" button multiple times, you just get one set of fake contacts.  If you click the "Create" button multiple times while changing templates between clicks, you will get duplicate-name fake contacts (harmless).  If you click the "Delete" button and the specified contacts don't exist, nothing is done, and no error message is shown.
+* The app is designed to be very simple and fail silently.  If you deny permission to access contacts, the app will not complain, it just will not work.  If you click the "Create" button multiple times, you just get one set of fake contacts.  If you click the "Delete" button and the specified contacts don't exist, nothing is done, and no error message is shown.
 
 * Don't create any fake contact with the same full name as one of your real contacts.  If you delete fake contacts, the real one with same name will be deleted too.
 
@@ -53,6 +55,8 @@ Got working.
 Got published on F-Droid.
 ### 1.7.0
 Changed color of delete button, added space between buttons, added a lot more names, cleaned up the code a little.
+### 1.8.0
+Added Spanish description to Fastlane per https://github.com/BillDietrich/fake_contacts/pull/5
 
 
 
@@ -65,6 +69,7 @@ Changed color of delete button, added space between buttons, added a lot more na
 * Want to explicitly set Notification permission off, but there's no way to do it.
 * No UI feedback after create and delete operations.
 * Add photos from thispersondoesnotexist.com ?
+* Page doesn't scroll if screen is too short.
 * Inefficiency in the "save settings after every char changed in field" events.
 * Test on iOS.
 
@@ -77,6 +82,8 @@ Now using:
 * Dart
 * Linux
 * Phone running Android 9
+
+[F-Droid page for this app](https://fdroid.gitlab.io/fdroid-website/en/packages/me.billdietrich.fake_contacts/)
 
 [GitHub repo for this app](https://github.com/BillDietrich/fake_contacts)
 
