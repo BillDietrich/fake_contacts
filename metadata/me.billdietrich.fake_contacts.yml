@@ -10,9 +10,9 @@ RepoType: git
 Repo: https://github.com/BillDietrich/fake_contacts
 
 Builds:
-  - versionName: '1.7'
-    versionCode: 3
-    commit: v1.7
+  - versionName: '1.8'
+    versionCode: 4
+    commit: v1.8
     output: build/app/outputs/apk/release/app-release.apk
     srclibs:
       - flutter@1.26.0-12.0.pre
@@ -30,5 +30,5 @@ Builds:
 AutoUpdateMode: Version v%v
 UpdateCheckMode: HTTP
 UpdateCheckData: https://raw.githubusercontent.com/BillDietrich/fake_contacts/master/pubspec.yaml|version:\s.+\+(\d+)|.|version:\s(.+)\+
-CurrentVersion: '1.7'
-CurrentVersionCode: 3
+CurrentVersion: '1.8'
+CurrentVersionCode: 4
